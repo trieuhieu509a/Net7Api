@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Task = TodoList.Api.Entities.Task;
+using TodoList.Models;
 
 namespace TodoList.Api.Repositories
 {
     public interface ITaskRepository
     {
-        Task<IEnumerable<Task>> GetTaskList();
-        Task<Task> Create(Task task);
-        Task<Task> Update(Task task);
-        Task<Task> Delete(Task task);
-        Task<Task> GetById(Guid id);
+        Task<IEnumerable<Entities.Task>> GetTaskList();
+        Task<Entities.Task> Create(Entities.Task task);
+        Task<Entities.Task> Update(Entities.Task task);
+        Task<Entities.Task> Delete(Entities.Task task);
+        Task<Entities.Task> GetById(Guid id);
     }
 }

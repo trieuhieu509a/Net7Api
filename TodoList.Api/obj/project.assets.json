@@ -1314,6 +1314,16 @@
             "rid": "win"
           }
         }
+      },
+      "TodoList.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/TodoList.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TodoList.Models.dll": {}
+        }
       }
     }
   },
@@ -4088,6 +4098,11 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "TodoList.Models/1.0.0": {
+      "type": "project",
+      "path": "../TodoList.Models/TodoList.Models.csproj",
+      "msbuildProject": "../TodoList.Models/TodoList.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4098,7 +4113,8 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.10",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.10",
       "Polly >= 7.2.4",
-      "Swashbuckle.AspNetCore >= 6.5.0"
+      "Swashbuckle.AspNetCore >= 6.5.0",
+      "TodoList.Models >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4133,7 +4149,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\project\\Net\\TodoList.Api\\TodoList.Models\\TodoList.Models.csproj": {
+              "projectPath": "D:\\project\\Net\\TodoList.Api\\TodoList.Models\\TodoList.Models.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -4198,7 +4218,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

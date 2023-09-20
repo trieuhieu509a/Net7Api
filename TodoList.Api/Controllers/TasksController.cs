@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TodoList.Api.Repositories;
+using TodoList.Models;
 
 namespace TodoList.Api.Controllers
 {
@@ -18,25 +19,44 @@ namespace TodoList.Api.Controllers
         public async Task<IActionResult> GetAll()
         {
             var task = await _taskRepository.GetTaskList();
+            task.Select(x => new TaskDto()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                AssigneeId = x.AssigneeId,
+                AssigneeName = x.Assignee!=null ? x.Assignee.FirstName + " " + x.Assignee.LastName : "N/A",
+                CreatedDate = x.CreatedDate,
+                Priority = x.Priority,
+                Status = x.Status
+            });
             return Ok(task);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Entities.Task task)
+        public async Task<IActionResult> Create(TaskCreateRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var tasks = await _taskRepository.Create(task);
-            return CreatedAtAction(nameof(GetById), new { id = task.Id }, tasks);
+            var task = await _taskRepository.Create(new Entities.Task()
+            {
+                Id = request.Id,
+                Name = request.Name,
+                Priority = request.Priority,
+                Status = Models.Enums.Status.Open,
+                CreatedDate = DateTime.Now,
+            });
+            return CreatedAtAction(nameof(GetById), new { id = request.Id }, task);
         }
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> Update(Guid id, Entities.Task task)
+        public async Task<IActionResult> Update(Guid id, TaskUpdateRequest request)
         {
             if (!ModelState.IsValid)
+            {
                 return BadRequest(ModelState);
+            }
 
             var taskFromDb = await _taskRepository.GetById(id);
 
@@ -45,14 +65,33 @@ namespace TodoList.Api.Controllers
                 return NotFound($"{id} is not found");
             }
 
-            taskFromDb.Name = task.Name;
-            var tasks = await _taskRepository.Update(task);
+            taskFromDb.Name = request.Name;
+            taskFromDb.Priority = request.Priority;
 
-            return Ok(tasks);
+            try
+            {
+                await _taskRepository.Update(taskFromDb);
+            }
+            catch (System.Data.SqlTypes.SqlNullValueException e)
+            {
+                return BadRequest(e.Message);
+            }
+
+            var taskDto = new TaskDto()
+            {
+                AssigneeId = taskFromDb.AssigneeId,
+                CreatedDate = taskFromDb.CreatedDate,
+                Id = taskFromDb.Id,
+                Name = taskFromDb.Name,
+                Priority = taskFromDb.Priority,
+                Status = taskFromDb.Status,
+            };
+
+            return Ok(taskDto);
         }
 
 
-        //api/tasks/xxxx
+        //api/task/xxxx
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)

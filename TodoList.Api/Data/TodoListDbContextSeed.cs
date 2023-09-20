@@ -29,8 +29,8 @@ namespace TodoList.Api.Data
                     Id = Guid.NewGuid(),
                     Name = "Task 1",
                     CreatedDate = DateTime.UtcNow,
-                    Priority = Enums.Priority.High,
-                    Status = Enums.Status.InProgress
+                    Priority = Models.Enums.Priority.High,
+                    Status = Models.Enums.Status.InProgress
                 });
             }
 

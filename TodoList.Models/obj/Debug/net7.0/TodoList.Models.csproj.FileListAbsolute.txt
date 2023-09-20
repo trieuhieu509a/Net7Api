@@ -1,0 +1,11 @@
+D:\project\Net\TodoList.Api\TodoList.Models\bin\Debug\net7.0\TodoList.Models.deps.json
+D:\project\Net\TodoList.Api\TodoList.Models\bin\Debug\net7.0\TodoList.Models.dll
+D:\project\Net\TodoList.Api\TodoList.Models\bin\Debug\net7.0\TodoList.Models.pdb
+D:\project\Net\TodoList.Api\TodoList.Models\obj\Debug\net7.0\TodoList.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\project\Net\TodoList.Api\TodoList.Models\obj\Debug\net7.0\TodoList.Models.AssemblyInfoInputs.cache
+D:\project\Net\TodoList.Api\TodoList.Models\obj\Debug\net7.0\TodoList.Models.AssemblyInfo.cs
+D:\project\Net\TodoList.Api\TodoList.Models\obj\Debug\net7.0\TodoList.Models.csproj.CoreCompileInputs.cache
+D:\project\Net\TodoList.Api\TodoList.Models\obj\Debug\net7.0\TodoList.Models.dll
+D:\project\Net\TodoList.Api\TodoList.Models\obj\Debug\net7.0\refint\TodoList.Models.dll
+D:\project\Net\TodoList.Api\TodoList.Models\obj\Debug\net7.0\TodoList.Models.pdb
+D:\project\Net\TodoList.Api\TodoList.Models\obj\Debug\net7.0\ref\TodoList.Models.dll

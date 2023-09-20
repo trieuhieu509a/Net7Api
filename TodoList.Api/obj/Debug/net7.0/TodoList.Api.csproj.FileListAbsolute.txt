@@ -80,3 +80,5 @@ D:\project\Net\TodoList.Api\TodoList.Api\obj\Debug\net7.0\TodoList.Api.pdb
 D:\project\Net\TodoList.Api\TodoList.Api\obj\Debug\net7.0\TodoList.Api.genruntimeconfig.cache
 D:\project\Net\TodoList.Api\TodoList.Api\obj\Debug\net7.0\ref\TodoList.Api.dll
 D:\project\Net\TodoList.Api\TodoList.Api\bin\Debug\net7.0\Polly.dll
+D:\project\Net\TodoList.Api\TodoList.Api\bin\Debug\net7.0\TodoList.Models.dll
+D:\project\Net\TodoList.Api\TodoList.Api\bin\Debug\net7.0\TodoList.Models.pdb
