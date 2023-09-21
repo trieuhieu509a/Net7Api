@@ -7,3 +7,5 @@
 /TodoList.Models/bin/Debug/net7.0
 /TodoList.Api/bin
 /TodoList.Api/obj
+/.vs
+/.vs/TodoList.Api/v17/.suo
