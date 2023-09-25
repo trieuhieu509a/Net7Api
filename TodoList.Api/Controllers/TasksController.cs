@@ -15,11 +15,12 @@ namespace TodoList.Api.Controllers
             _taskRepository = taskRepository;
         }
 
+        //api/tasks?name=
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] TaskListSearch taskListSearch)
         {
-            var task = await _taskRepository.GetTaskList();
-            task.Select(x => new TaskDto()
+            var tasks = await _taskRepository.GetTaskList(taskListSearch);
+            tasks.Select(x => new TaskDto()
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -29,7 +30,7 @@ namespace TodoList.Api.Controllers
                 Priority = x.Priority,
                 Status = x.Status
             });
-            return Ok(task);
+            return Ok(tasks);
         }
 
         [HttpPost]

@@ -5,6 +5,7 @@
 /TodoListBlazorWasm/bin/Debug/net7.0
 /TodoListBlazorWasm/obj
 /TodoList.Models/bin/Debug/net7.0
+/TodoList.Models/obj
 /TodoList.Api/bin
 /TodoList.Api/obj
 /.vs
