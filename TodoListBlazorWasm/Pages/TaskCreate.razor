@@ -1,9 +1,12 @@
 ﻿@page "/taskCreate"
 @using TodoList.Models;
 @using TodoList.Models.Enums;
+@using TodoListBlazorWasm.Services;
+@inject ITaskApiClient TaskApiClient;
+@inject NavigationManager NavigationManager;
 
 <h3>TaskCreate</h3>
-<EditForm Model="Task">
+<EditForm Model="Task" OnValidSubmit="SubmitTask">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="form-group">
@@ -29,4 +32,13 @@
 
 @code {
     private TaskCreateRequest Task = new TaskCreateRequest();
+
+    private async Task SubmitTask()
+    {
+        var result = await TaskApiClient.CreateTask(Task);
+        if (result)
+        {
+            NavigationManager.NavigateTo("taskList");
+        }
+    }
 }
