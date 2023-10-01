@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TodoList.Api.Repositories;
 using TodoList.Models;
+using TodoList.Models.Enums;
 
 namespace TodoList.Api.Controllers
 {
@@ -43,7 +44,7 @@ namespace TodoList.Api.Controllers
             {
                 Id = request.Id,
                 Name = request.Name,
-                Priority = request.Priority,
+                Priority = request.Priority.HasValue ? request.Priority.Value : Priority.Low,
                 Status = Models.Enums.Status.Open,
                 CreatedDate = DateTime.Now,
             });

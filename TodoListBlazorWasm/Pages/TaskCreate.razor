@@ -4,9 +4,12 @@
 
 <h3>TaskCreate</h3>
 <EditForm Model="Task">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
     <div class="form-group">
         <label for="Name">Name</label>
         <InputText class="form-control" @bind-Value="Task.Name"></InputText>
+        <ValidationMessage For="()=>Task.Name"></ValidationMessage>
         <small id="nameHelp" class="form-text text-muted">Please enter task title here.</small>
     </div>
     <div class="form-group">
@@ -18,6 +21,7 @@
                 <option value="@item">@item</option>
             }
         </InputSelect>
+        <ValidationMessage For="()=>Task.Priority"></ValidationMessage>
         <small id="nameHelp" class="form-text text-muted">Choose a priority which you want.</small>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
