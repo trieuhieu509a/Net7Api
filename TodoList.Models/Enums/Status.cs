@@ -2,6 +2,6 @@
 {
     public enum Status
     {
-        New,InProgress,Resolved,Done,Canceled,Rejected,Open,Close
+        New,InProgress,Resolved,Done,Canceled,Rejected,Open,Close,Inprogress
     }
 }
