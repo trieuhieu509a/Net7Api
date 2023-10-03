@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using TodoList.Models;
 using TodoList.Models.Enums;
+using TodoListBlazorWasm.Components;
 using TodoListBlazorWasm.Services;
 
 namespace TodoListBlazorWasm.Pages
@@ -13,6 +14,8 @@ namespace TodoListBlazorWasm.Pages
         private List<TaskDto> Tasks;
 
         private TaskListSearch TaskListSearch = new TaskListSearch();
+        protected Confirmation DeleteConfirmation { set; get; }
+        private Guid DeleteId { set; get; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -23,6 +26,20 @@ namespace TodoListBlazorWasm.Pages
         {
             TaskListSearch = taskListSearch;
             Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
+        }
+        public void OnDeleteTask(Guid deleteId)
+        {
+            DeleteId = deleteId;
+            DeleteConfirmation.Show();
+        }
+
+        public async Task OnConfirmDeleteTask(bool deleteConfirmed)
+        {
+            if (deleteConfirmed)
+            {
+                await TaskApiClient.DeleteTask(DeleteId);
+                Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
+            }
         }
     }
 
