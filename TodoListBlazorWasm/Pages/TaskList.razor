@@ -36,7 +36,7 @@ else
                     <tr>
                         <td>@item.Name</td>
                         <td><PriorityLabel Priority="item.Priority"></PriorityLabel></td>
-                        <td>@item.AssigneeName</td>
+                        <td><a style="cursor:pointer;" @onclick="()=>OpenAssignPopup(item.Id)">@item.AssigneeName</a></td>
                         <td>@item.CreatedDate.ToString(Configuration["DateTimeFormat"])</td>
                         <td><StatusLabel Status="@item.Status"></StatusLabel></td>
                         <td>
@@ -56,4 +56,6 @@ else
                   ConfirmationChanged="OnConfirmDeleteTask">
 
     </Confirmation>
+
+    <AssignTask @ref="AssignTaskDialog" CloseEventCallbak="AssignTaskSuccess"></AssignTask>
 }

@@ -15,6 +15,8 @@ namespace TodoListBlazorWasm.Pages
 
         private TaskListSearch TaskListSearch = new TaskListSearch();
         protected Confirmation DeleteConfirmation { set; get; }
+        protected AssignTask AssignTaskDialog { set; get; }
+
         private Guid DeleteId { set; get; }
 
         protected override async Task OnInitializedAsync()
@@ -38,6 +40,18 @@ namespace TodoListBlazorWasm.Pages
             if (deleteConfirmed)
             {
                 await TaskApiClient.DeleteTask(DeleteId);
+                Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
+            }
+        }
+        public void OpenAssignPopup(Guid id)
+        {
+            AssignTaskDialog.Show(id);
+        }
+
+        public async Task AssignTaskSuccess(bool result)
+        {
+            if (result)
+            {
                 Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
             }
         }
