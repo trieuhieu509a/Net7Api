@@ -11,6 +11,10 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddTransient<ITaskApiClient, TaskApiClient>();
 builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 builder.Services.AddBlazoredToast();
+builder.Services.AddScoped(sp => new HttpClient
+{
+    BaseAddress = new Uri(builder.Configuration["BackendApiUrl"])
+});
 
 //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7135/") });
