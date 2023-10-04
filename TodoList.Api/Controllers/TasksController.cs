@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TodoList.Api.Repositories;
 using TodoList.Models;
 using TodoList.Models.Enums;
+using TodoList.Models.SeedWork;
 
 namespace TodoList.Api.Controllers
 {
@@ -20,8 +21,8 @@ namespace TodoList.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] TaskListSearch taskListSearch)
         {
-            var tasks = await _taskRepository.GetTaskList(taskListSearch);
-            var taskDtos = tasks.Select(x => new TaskDto()
+            var pagedList = await _taskRepository.GetTaskList(taskListSearch);
+            var taskDtos = pagedList.Items.Select(x => new TaskDto()
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -31,7 +32,12 @@ namespace TodoList.Api.Controllers
                 Priority = x.Priority,
                 Status = x.Status
             });
-            return Ok(taskDtos);
+            return Ok(
+                    new PagedList<TaskDto>(taskDtos.ToList(),
+                        pagedList.MetaData.TotalCount,
+                        pagedList.MetaData.CurrentPage,
+                        pagedList.MetaData.PageSize)
+                );
         }
 
         [HttpPost]
