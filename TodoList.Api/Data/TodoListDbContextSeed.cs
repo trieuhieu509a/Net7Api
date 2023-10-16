@@ -12,10 +12,14 @@ namespace TodoList.Api.Data
             {
                 var user = new Entities.User()
                 {
-                    FirstName = "Admin",
-                    LastName = "Admin",
+                    FirstName = "Mr",
+                    LastName = "A",
+                    Email = "admin1@gmail.com",
+                    NormalizedEmail = "ADMIN1@GMAIL.COM",
+                    PhoneNumber = "032132131",
                     UserName = "admin",
-                    Email = "admin@localhost",
+                    NormalizedUserName = "ADMIN",
+                    SecurityStamp = Guid.NewGuid().ToString()
                 };
                 user.PasswordHash = _passwordHasher.HashPassword(user, "admin");
 
