@@ -33,6 +33,25 @@ namespace TodoListBlazorWasm.Services
             var result = await _httpClient.GetFromJsonAsync<PagedList<TaskDto>>(url);
             return result;
         }
+        public async Task<PagedList<TaskDto>> GetMyTasks(TaskListSearch taskListSearch)
+        {
+            var queryStringParam = new Dictionary<string, string>
+            {
+                ["pageNumber"] = taskListSearch.PageNumber.ToString()
+            };
+
+            if (!string.IsNullOrEmpty(taskListSearch.Name))
+                queryStringParam.Add("name", taskListSearch.Name);
+            if (taskListSearch.AssigneeId.HasValue)
+                queryStringParam.Add("assigneeId", taskListSearch.AssigneeId.ToString());
+            if (taskListSearch.Priority.HasValue)
+                queryStringParam.Add("priority", taskListSearch.Priority.ToString());
+
+            string url = QueryHelpers.AddQueryString("/api/tasks/me", queryStringParam);
+
+            var result = await _httpClient.GetFromJsonAsync<PagedList<TaskDto>>(url);
+            return result;
+        }
 
         public async Task<TaskDto> GetTaskDetail(string id)
         {

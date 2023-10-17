@@ -16,20 +16,18 @@ using TodoListBlazorWasm.Shared;
 
 namespace TodoListBlazorWasm.Pages
 {
-    public partial class TaskList
+    public partial class MyTasks
     {
         [Inject] private ITaskApiClient TaskApiClient { set; get; }
-        [Inject] private IUserApiClient UserApiClient { set; get; }
 
-        private List<TaskDto> Tasks;
-
-        public MetaData MetaData { get; set; } = new MetaData();
-
-        private TaskListSearch TaskListSearch = new TaskListSearch();
         protected Confirmation DeleteConfirmation { set; get; }
         protected AssignTask AssignTaskDialog { set; get; }
 
         private Guid DeleteId { set; get; }
+        private List<TaskDto> Tasks;
+        public MetaData MetaData { get; set; } = new MetaData();
+
+        private TaskListSearch TaskListSearch = new TaskListSearch();
 
         [CascadingParameter]
         private Error Error { set; get; }
@@ -39,11 +37,12 @@ namespace TodoListBlazorWasm.Pages
             await GetTasks();
         }
 
-        private async Task SearchTask(TaskListSearch taskListSearch)
+        public async Task SearchTask(TaskListSearch taskListSearch)
         {
             TaskListSearch = taskListSearch;
             await GetTasks();
         }
+
         public void OnDeleteTask(Guid deleteId)
         {
             DeleteId = deleteId;
@@ -58,6 +57,7 @@ namespace TodoListBlazorWasm.Pages
                 await GetTasks();
             }
         }
+
         public void OpenAssignPopup(Guid id)
         {
             AssignTaskDialog.Show(id);
@@ -75,14 +75,15 @@ namespace TodoListBlazorWasm.Pages
         {
             try
             {
-                var pagingResponse = await TaskApiClient.GetTaskList(TaskListSearch);
+                var pagingResponse = await TaskApiClient.GetMyTasks(TaskListSearch);
                 Tasks = pagingResponse.Items;
                 MetaData = pagingResponse.MetaData;
             }
             catch (Exception ex)
             {
-                //Error.ProcessError(ex);
+                Error.ProcessError(ex);
             }
+
         }
 
         private async Task SelectedPage(int page)
@@ -91,5 +92,6 @@ namespace TodoListBlazorWasm.Pages
             await GetTasks();
         }
     }
+
 
 }

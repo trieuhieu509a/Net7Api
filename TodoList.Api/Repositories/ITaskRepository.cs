@@ -6,6 +6,7 @@ namespace TodoList.Api.Repositories
     public interface ITaskRepository
     {
         Task<PagedList<Entities.Task>> GetTaskList(TaskListSearch taskListSearch);
+        Task<PagedList<Entities.Task>> GetTaskListByUserId(Guid userId, TaskListSearch taskListSearch);
         Task<Entities.Task> Create(Entities.Task task);
         Task<Entities.Task> Update(Entities.Task task);
         Task<Entities.Task> Delete(Entities.Task task);
